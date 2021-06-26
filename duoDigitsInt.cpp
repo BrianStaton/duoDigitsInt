@@ -2,12 +2,17 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <iostream>
 
-bool isDuoDigital(uint32_t n)
+using namespace std;
+
+typedef uint64_t bls_t;
+
+bool isDuoDigital(bls_t n)
 {
-    uint32_t d1 = n % 10;
-    uint32_t d2;
-    uint32_t d;
+    bls_t d1 = n % 10;
+    bls_t d2;
+    bls_t d;
     bool d2IsValid = false;
 
     n /= 10;
@@ -30,9 +35,9 @@ bool isDuoDigital(uint32_t n)
     }
     return true;
 }
-uint32_t d(uint32_t n)
+bls_t d(bls_t n)
 {
-    uint32_t m = n;
+    bls_t m = n;
     uint32_t iterations = 0;
     uint32_t iterationsDivMillion = 0;
 
@@ -44,17 +49,17 @@ uint32_t d(uint32_t n)
         {
             iterations = 0;
             iterationsDivMillion += 10;
-            printf("d(%d) %d million iterations\n", n, iterationsDivMillion);
+            cout << "d(" << n << ") " << iterationsDivMillion << "million iterations\n";
         }
     }
     return m;
 }
 
-uint32_t bigD(uint32_t k)
+bls_t bigD(bls_t k)
 {
-    uint32_t s = 0;
+    bls_t s = 0;
 
-    for(uint32_t n = 1; n <= k; ++n)
+    for(bls_t n = 1; n <= k; ++n)
     {
         s += d(n);
     }
@@ -62,27 +67,26 @@ uint32_t bigD(uint32_t k)
 }
 int main(int argc, char *argv[])
 {
-    uint32_t k = 500;
+    bls_t k = 500;
 
     #if 0
-    uint32_t v = 100;
+    bls_t v = 100;
 
-    printf("Getting d(%d)\n", v);
-    uint32_t x1 = d(v);
-    printf("d(%d) = %d\n", v, x1);
-
+    cout << "Getting d(" << v << ")\n";
+    bls_t x1 = d(v);
+    cout << "d(" << v << ") = " << x1 << "\n";
     #endif // 0
 
     if (argc > 1)
     {
-        k = (uint32_t)strtoul(argv[1], NULL, 0);
+        k = (bls_t)strtoul(argv[1], NULL, 0);
     }
 
-    printf("Computing BigD(%d)\n", k);
+    cout << "Computing BigD(" << k << ")\n";
 
-    uint32_t s = bigD(k);
+    bls_t s = bigD(k);
 
-    printf("BigD(%d) = %d\n", k, s);
+    cout << "BigD(" << k << ") = " << s << "\n";
 
     return 0;
 }
