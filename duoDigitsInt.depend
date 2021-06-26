@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1624737896 source:/home/bruno/Workspace/duoDigitsInt/duoDigitsInt.cpp
+	<stdio.h>
+	<stdint.h>
+	<stdbool.h>
+	<stdlib.h>
+
